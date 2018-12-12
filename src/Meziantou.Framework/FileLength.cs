@@ -34,7 +34,7 @@ namespace Meziantou.Framework
 
         public override string ToString() => ToString(null, null);
 
-        public string ToString(string format, IFormatProvider formatProvider)
+        public string ToString(string? format, IFormatProvider? formatProvider)
         {
             if (string.IsNullOrEmpty(format))
                 return Length.ToString(formatProvider);

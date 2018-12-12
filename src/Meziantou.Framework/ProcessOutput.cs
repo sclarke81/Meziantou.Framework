@@ -4,10 +4,10 @@ namespace Meziantou.Framework
 {
     public class ProcessOutput
     {
-        public ProcessOutput(ProcessOutputType type, string text)
+        internal ProcessOutput(ProcessOutputType type, string text)
         {
-            Type = type;
             Text = text ?? throw new ArgumentNullException(nameof(text));
+            Type = type;            
         }
 
         public ProcessOutputType Type { get; }

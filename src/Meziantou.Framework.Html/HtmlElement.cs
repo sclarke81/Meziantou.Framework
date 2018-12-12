@@ -17,7 +17,7 @@ namespace Meziantou.Framework.Html
         private char _closeChar = '/';
         private HtmlNodeType _nodeType;
 
-        protected internal HtmlElement(string prefix, string localName, string namespaceURI, HtmlDocument ownerDocument)
+        protected internal HtmlElement(string prefix, string localName, string? namespaceURI, HtmlDocument ownerDocument)
             : base(prefix, localName, namespaceURI, ownerDocument)
         {
             _nodeType = IsDocumentType ? HtmlNodeType.DocumentType : HtmlNodeType.Element;
@@ -145,7 +145,7 @@ namespace Meziantou.Framework.Html
 
         public override HtmlNodeType NodeType => _nodeType;
 
-        internal HtmlElement GetParentToClose(int indent, string name)
+        internal HtmlElement? GetParentToClose(int indent, string name)
         {
             // NOTE: this avoids possible stack overflow errors for "super malformed" documents
             if (indent > 100)

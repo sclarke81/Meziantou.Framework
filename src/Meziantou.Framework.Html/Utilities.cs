@@ -15,7 +15,7 @@ namespace Meziantou.Framework.Html
         }
 
         [Pure]
-        public static string Nullify(string str, bool trim)
+        public static string? Nullify(string str, bool trim)
         {
             if (str == null)
                 return null;
@@ -110,7 +110,7 @@ namespace Meziantou.Framework.Html
             return new StreamWriter(stream, new UTF8Encoding(false, true), 0x400, false);
         }
 
-        public static string GetAttributeFromHeader(string header, string name)
+        public static string? GetAttributeFromHeader(string? header, string name)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -279,12 +279,12 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public static string GetServerPath(string path)
+        public static string? GetServerPath(string path)
         {
             return GetServerPath(path, out var server, out var share, out var sharePath);
         }
 
-        public static string GetServerPath(string path, out string serverName, out string shareName, out string sharePath)
+        public static string? GetServerPath(string path, out string? serverName, out string? shareName, out string? sharePath)
         {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
@@ -321,7 +321,7 @@ namespace Meziantou.Framework.Html
 
         private const string Prefix = @"\\?\";
 
-        public static bool IsRooted(string path)
+        public static bool IsRooted(string? path)
         {
             if (path == null)
                 return false;

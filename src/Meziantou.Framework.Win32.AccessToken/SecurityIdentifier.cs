@@ -10,15 +10,11 @@ namespace Meziantou.Framework.Win32
     {
         private const byte MaxSubAuthorities = 15;
         private const int MaxBinaryLength = 1 + 1 + 6 + (MaxSubAuthorities * 4); // 4 bytes for each subauth
-
-        private readonly IntPtr _sid;
-
+        
         internal SecurityIdentifier(IntPtr sid)
         {
             if (sid == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(sid));
-
-            _sid = sid;
 
             LookupName(sid, out var domain, out var name);
             Domain = domain;
@@ -26,8 +22,8 @@ namespace Meziantou.Framework.Win32
             Sid = ConvertSidToStringSid(sid);
         }
 
-        public string Domain { get; }
-        public string Name { get; }
+        public string? Domain { get; }
+        public string? Name { get; }
         public string Sid { get; }
 
         public string FullName => Domain + "\\" + Name;
@@ -71,7 +67,7 @@ namespace Meziantou.Framework.Win32
             throw new Win32Exception(Marshal.GetLastWin32Error());
         }
 
-        private static void LookupName(IntPtr sid, out string domain, out string name)
+        private static void LookupName(IntPtr sid, out string? domain, out string? name)
         {
             var userNameLen = 256;
             var domainNameLen = 256;

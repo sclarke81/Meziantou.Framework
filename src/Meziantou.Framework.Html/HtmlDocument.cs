@@ -13,30 +13,30 @@ namespace Meziantou.Framework.Html
     public class HtmlDocument : HtmlNode
     {
         private HtmlOptions _options = new HtmlOptions();
-        private string _filePath;
-        private HtmlElement _baseElement;
+        private string? _filePath;
+        private HtmlElement? _baseElement;
         private bool _baseElementSearched;
         private bool? _xhtml;
-        private HtmlAttribute _namespaceXml;
-        private Dictionary<string, string> _declaredNamespaces;
-        private Dictionary<string, string> _declaredPrefixes;
+        private HtmlAttribute? _namespaceXml;
+        private Dictionary<string, string>? _declaredNamespaces;
+        private Dictionary<string, string>? _declaredPrefixes;
 
         public event EventHandler<HtmlDocumentParseEventArgs> Parsing;
         public event EventHandler<HtmlDocumentParseEventArgs> Parsed;
 
         public HtmlDocument()
-            : base(string.Empty, "#document", string.Empty, null)
+            : base(string.Empty, "#document", string.Empty, ownerDocument: null)
         {
         }
 
-        public virtual Encoding StreamEncoding { get; private set; }
-        public virtual Encoding DetectedEncoding { get; private set; }
-        public new virtual Uri BaseAddress { get; set; }
+        public virtual Encoding? StreamEncoding { get; private set; }
+        public virtual Encoding? DetectedEncoding { get; private set; }
+        public new virtual Uri? BaseAddress { get; set; }
         public virtual bool ReaderWasRestarted { get; private set; }
-        public virtual HtmlElement DocumentType { get; private set; }
-        public virtual HtmlElement HtmlElement { get; private set; }
-        public virtual HtmlElement BodyElement { get; private set; }
-        public virtual HtmlElement HeadElement { get; private set; }
+        public virtual HtmlElement? DocumentType { get; private set; }
+        public virtual HtmlElement? HtmlElement { get; private set; }
+        public virtual HtmlElement? BodyElement { get; private set; }
+        public virtual HtmlElement? HeadElement { get; private set; }
 
         internal static void RemoveIntrinsicElement(HtmlDocument doc, HtmlElement element)
         {
@@ -68,7 +68,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public virtual string FilePath
+        public virtual string? FilePath
         {
             get => _filePath;
             protected set
@@ -463,7 +463,7 @@ namespace Meziantou.Framework.Html
             return CreateAttribute(prefix, localName, null);
         }
 
-        public virtual HtmlAttribute CreateAttribute(string prefix, string localName, string namespaceURI)
+        public virtual HtmlAttribute CreateAttribute(string prefix, string localName, string? namespaceURI)
         {
             if (prefix == null)
                 throw new ArgumentNullException(nameof(prefix));
@@ -495,10 +495,13 @@ namespace Meziantou.Framework.Html
                 throw new ArgumentNullException(nameof(name));
 
             ParseName(name, out var prefix, out var localName);
+            if (prefix == null || localName == null)
+                throw new ArgumentException("name is not valid", nameof(name));
+
             return CreateElement(prefix, localName, null);
         }
 
-        public virtual HtmlElement CreateElement(string prefix, string localName, string namespaceURI)
+        public virtual HtmlElement CreateElement(string prefix, string localName, string? namespaceURI)
         {
             if (prefix == null)
                 throw new ArgumentNullException(nameof(prefix));
@@ -549,7 +552,7 @@ namespace Meziantou.Framework.Html
         }
 
         // see http://stackoverflow.com/questions/4696499/meta-charset-utf-8-vs-meta-http-equiv-content-type
-        private static string GetEncodingName(HtmlElement meta)
+        private static string? GetEncodingName(HtmlElement meta)
         {
             var name = Utilities.Nullify(meta.GetAttributeValue("charset"), true);
             if (name != null)
@@ -926,7 +929,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public virtual HtmlElement BaseElement
+        public virtual HtmlElement? BaseElement
         {
             get
             {

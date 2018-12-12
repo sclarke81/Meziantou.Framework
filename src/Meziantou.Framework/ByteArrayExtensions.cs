@@ -29,17 +29,17 @@ namespace Meziantou.Framework
 
         private static string ToHexaUpperCase(this byte[] bytes)
         {
-            const int addToAlpha = 55;
-            const int addToDigit = -7;
+            const int AddToAlpha = 55;
+            const int AddToDigit = -7;
 
             var c = new char[bytes.Length * 2];
             for (var i = 0; i < bytes.Length; i++)
             {
                 var b = bytes[i] >> 4;
-                c[i * 2] = (char)(addToAlpha + b + (((b - 10) >> 31) & addToDigit));
+                c[i * 2] = (char)(AddToAlpha + b + (((b - 10) >> 31) & AddToDigit));
 
                 b = bytes[i] & 0xF;
-                c[(i * 2) + 1] = (char)(addToAlpha + b + (((b - 10) >> 31) & addToDigit));
+                c[(i * 2) + 1] = (char)(AddToAlpha + b + (((b - 10) >> 31) & AddToDigit));
             }
 
             return new string(c);
@@ -47,17 +47,17 @@ namespace Meziantou.Framework
 
         private static string ToHexaLowerCase(this byte[] bytes)
         {
-            const int addToAlpha = 87;
-            const int addToDigit = -39;
+            const int AddToAlpha = 87;
+            const int AddToDigit = -39;
 
             var c = new char[bytes.Length * 2];
             for (var i = 0; i < bytes.Length; i++)
             {
                 var b = bytes[i] >> 4;
-                c[i * 2] = (char)(addToAlpha + b + (((b - 10) >> 31) & addToDigit));
+                c[i * 2] = (char)(AddToAlpha + b + (((b - 10) >> 31) & AddToDigit));
 
                 b = bytes[i] & 0xF;
-                c[(i * 2) + 1] = (char)(addToAlpha + b + (((b - 10) >> 31) & addToDigit));
+                c[(i * 2) + 1] = (char)(AddToAlpha + b + (((b - 10) >> 31) & AddToDigit));
             }
 
             return new string(c);

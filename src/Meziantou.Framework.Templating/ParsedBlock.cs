@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.IO;
 
 namespace Meziantou.Framework.Templating
 {
-    public class ParsedBlock : IComparable, IComparable<ParsedBlock>
+    public class ParsedBlock : IComparable, IComparable<ParsedBlock?>
     {
         public ParsedBlock(Template template, string text, int index)
         {
@@ -31,7 +31,7 @@ namespace Meziantou.Framework.Templating
             return s?.Replace("\"", "\"\"");
         }
 
-        int IComparable<ParsedBlock>.CompareTo(ParsedBlock other)
+        int IComparable<ParsedBlock?>.CompareTo(ParsedBlock? other)
         {
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
@@ -41,7 +41,7 @@ namespace Meziantou.Framework.Templating
 
         int IComparable.CompareTo(object obj)
         {
-            return ((IComparable<ParsedBlock>)this).CompareTo(obj as ParsedBlock);
+            return ((IComparable<ParsedBlock?>)this).CompareTo(obj as ParsedBlock);
         }
     }
 }

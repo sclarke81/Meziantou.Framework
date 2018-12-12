@@ -25,22 +25,22 @@ namespace Meziantou.Framework.Html
 
         public const string XhtmlPrefix = "xhtml";
         public const string XhtmlNamespaceURI = "http://www.w3.org/1999/xhtml";
-        private Collection<HtmlError> _errors;
-        private HtmlNodeList _childNodes;
-        private HtmlAttributeList _attributes;
-        private HtmlNode _parentNode;
-        private HtmlDocument _ownerDocument;
+        private Collection<HtmlError>? _errors;
+        private HtmlNodeList? _childNodes;
+        private HtmlAttributeList? _attributes;
+        private HtmlNode? _parentNode;
+        private HtmlDocument? _ownerDocument;
         private string _prefix;
-        private string _namespaceURI;
+        private string? _namespaceURI;
         private string _localName;
-        private object _tag;
+        private object? _tag;
 
         // caches
-        private string _innerText;
-        private string _outerHtml;
-        private string _innerHtml;
-        private string _outerXml;
-        private string _innerXml;
+        private string? _innerText;
+        private string? _outerHtml;
+        private string? _innerHtml;
+        private string? _outerXml;
+        private string? _innerXml;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -51,7 +51,7 @@ namespace Meziantou.Framework.Html
             NamespaceManager.AddNamespace(XhtmlPrefix, XhtmlNamespaceURI);
         }
 
-        protected HtmlNode(string prefix, string localName, string namespaceURI, HtmlDocument ownerDocument)
+        protected HtmlNode(string prefix, string localName, string? namespaceURI, HtmlDocument? ownerDocument)
         {
             if (ownerDocument == null && !(this is HtmlDocument))
                 throw new ArgumentNullException(nameof(ownerDocument));
@@ -113,7 +113,7 @@ namespace Meziantou.Framework.Html
             PropertyChanged?.Invoke(this, e);
         }
 
-        protected string DeclaredNamespaceURI => _namespaceURI;
+        protected string? DeclaredNamespaceURI => _namespaceURI;
 
         public virtual int ParentIndex
         {
@@ -149,7 +149,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public virtual HtmlNode NextSibling
+        public virtual HtmlNode? NextSibling
         {
             get
             {
@@ -182,7 +182,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public virtual HtmlNode PreviousSibling
+        public virtual HtmlNode? PreviousSibling
         {
             get
             {
@@ -224,7 +224,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        protected virtual void ParseName(string name, out string prefix, out string localName)
+        protected virtual void ParseName(string name, out string? prefix, out string? localName)
         {
             if (name == null)
             {
@@ -296,7 +296,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public HtmlDocument OwnerDocument
+        public HtmlDocument? OwnerDocument
         {
             get
             {
@@ -324,7 +324,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public virtual object Tag
+        public virtual object? Tag
         {
             get => _tag;
             set
@@ -337,7 +337,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public virtual string Value
+        public virtual string? Value
         {
             get => null;
             set
@@ -369,7 +369,7 @@ namespace Meziantou.Framework.Html
             return string.IsNullOrWhiteSpace(ns) || ns == XhtmlNamespaceURI;
         }
 
-        public HtmlNode ParentNode
+        public HtmlNode? ParentNode
         {
             get => _parentNode;
             internal set
@@ -395,11 +395,11 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public HtmlElement ParentElement
+        public HtmlElement? ParentElement
         {
             get
             {
-                for (var node = ParentNode; node != null; node = node.ParentNode)
+                for (var node = ParentNode; node != null; node = node!.ParentNode)
                 {
                     if (node is HtmlElement parentElement)
                         return parentElement;
@@ -409,7 +409,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public string Id => GetAttributeValue("id");
+        public string? Id => GetAttributeValue("id");
 
         protected internal virtual void AddError(HtmlError error)
         {
@@ -558,7 +558,7 @@ namespace Meziantou.Framework.Html
             set => throw new InvalidOperationException();
         }
 
-        public HtmlNode FirstChild
+        public HtmlNode? FirstChild
         {
             get
             {
@@ -569,7 +569,7 @@ namespace Meziantou.Framework.Html
             }
         }
 
-        public HtmlNode LastChild
+        public HtmlNode? LastChild
         {
             get
             {
@@ -701,7 +701,7 @@ namespace Meziantou.Framework.Html
             return Attributes[name] != null;
         }
 
-        public string GetAttributeValue(string name)
+        public string? GetAttributeValue(string name)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -749,7 +749,7 @@ namespace Meziantou.Framework.Html
             return att.Value;
         }
 
-        public string GetNullifiedAttributeValue(string name)
+        public string? GetNullifiedAttributeValue(string name)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -764,7 +764,7 @@ namespace Meziantou.Framework.Html
             return Utilities.Nullify(att.Value, true);
         }
 
-        public string GetNullifiedAttributeValue(string localName, string namespaceURI)
+        public string? GetNullifiedAttributeValue(string localName, string namespaceURI)
         {
             if (localName == null)
                 throw new ArgumentNullException(nameof(localName));
@@ -1033,7 +1033,7 @@ namespace Meziantou.Framework.Html
             return string.Empty;
         }
 
-        public virtual HtmlNode GetParent(Func<HtmlNode, bool> func)
+        public virtual HtmlNode? GetParent(Func<HtmlNode, bool> func)
         {
             if (func == null)
                 throw new ArgumentNullException(nameof(func));
@@ -1070,7 +1070,7 @@ namespace Meziantou.Framework.Html
             ParentNode?.GetNamespaceAttributes(namespaces);
         }
 
-        public Uri BaseAddress => null;
+        public Uri? BaseAddress => null;
 
         public abstract void WriteTo(TextWriter writer);
         public abstract void WriteContentTo(TextWriter writer);
@@ -1151,7 +1151,7 @@ namespace Meziantou.Framework.Html
         }
 
         // NOTE: the doc must have been loaded as an HtmlXPathDocument for this to be valid
-        public virtual string XPathExpression => null;
+        public virtual string? XPathExpression => null;
 
         [Conditional("DEBUG")]
         internal virtual void CheckParenting()

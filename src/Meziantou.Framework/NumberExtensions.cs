@@ -83,7 +83,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this byte number, string format)
+        public static string ToStringInvariant(this byte number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -98,7 +98,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this sbyte number, string format)
+        public static string ToStringInvariant(this sbyte number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -113,7 +113,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this short number, string format)
+        public static string ToStringInvariant(this short number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -128,7 +128,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this ushort number, string format)
+        public static string ToStringInvariant(this ushort number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -143,7 +143,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this int number, string format)
+        public static string ToStringInvariant(this int number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -158,7 +158,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this uint number, string format)
+        public static string ToStringInvariant(this uint number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -173,7 +173,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this long number, string format)
+        public static string ToStringInvariant(this long number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -188,7 +188,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this ulong number, string format)
+        public static string ToStringInvariant(this ulong number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -203,7 +203,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this double number, string format)
+        public static string ToStringInvariant(this double number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -218,7 +218,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this float number, string format)
+        public static string ToStringInvariant(this float number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);
@@ -233,7 +233,7 @@ namespace Meziantou.Framework
         }
 
         [Pure]
-        public static string ToStringInvariant(this decimal number, string format)
+        public static string ToStringInvariant(this decimal number, string? format)
         {
             if (format != null)
                 return number.ToString(format, CultureInfo.InvariantCulture);

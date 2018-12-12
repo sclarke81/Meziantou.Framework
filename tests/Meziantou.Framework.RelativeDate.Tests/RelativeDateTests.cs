@@ -42,8 +42,8 @@ namespace Meziantou.Framework.Tests
             var resultFr = relativeDate.ToString(null, CultureInfo.GetCultureInfo("fr"));
             Assert.AreEqual(expectedValueFr, resultFr);
         }
-
-        private static IEnumerable<object[]> RelativeDate_ToString_Data
+        
+        public static IEnumerable<object[]> RelativeDate_ToString_Data
         {
             get
             {

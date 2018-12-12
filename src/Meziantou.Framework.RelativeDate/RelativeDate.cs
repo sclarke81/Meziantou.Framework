@@ -27,7 +27,7 @@ namespace Meziantou.Framework
             return ToString(null, null);
         }
 
-        public string ToString(string format, IFormatProvider formatProvider)
+        public string ToString(string? format, IFormatProvider? formatProvider)
         {
             var now = DateTime.Kind == DateTimeKind.Utc ? DateTimeService.UtcNow : DateTimeService.Now;
 
@@ -79,12 +79,12 @@ namespace Meziantou.Framework
             }
         }
 
-        private string GetString(string name, CultureInfo culture)
+        private string GetString(string name, CultureInfo? culture)
         {
             return LocalizationProvider.Current.GetString(name, culture);
         }
 
-        private string GetString(string name, CultureInfo culture, int value)
+        private string GetString(string name, CultureInfo? culture, int value)
         {
             return string.Format(LocalizationProvider.Current.GetString(name, culture), value);
         }

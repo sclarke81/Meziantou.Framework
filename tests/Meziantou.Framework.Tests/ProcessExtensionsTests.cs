@@ -113,7 +113,7 @@ namespace Meziantou.Framework.Tests
             var parents = current.GetAncestorProcessIds().ToList();
 
             CollectionAssert.AllItemsAreUnique(parents);
-            bool hasParent = false;
+            var hasParent = false;
             foreach (var parentId in parents)
             {
                 try

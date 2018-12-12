@@ -5,7 +5,7 @@ namespace Meziantou.Framework
 {
     public static class ExceptionExtensions
     {
-        public static string ToString(this Exception exception, bool includeInnerException)
+        public static string? ToString(this Exception? exception, bool includeInnerException)
         {
             if (exception == null)
                 return null;

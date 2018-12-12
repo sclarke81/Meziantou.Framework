@@ -12,7 +12,7 @@ namespace Meziantou.Framework.CodeDom
             Data[key] = value;
         }
 
-        public CodeObject Parent { get; internal set; }
+        public CodeObject? Parent { get; internal set; }
 
         protected void SetParent<T>(ref T field, T value) where T : CodeObject
         {

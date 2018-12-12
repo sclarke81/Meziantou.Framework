@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,14 +16,14 @@ namespace Meziantou.Framework.Templating
         private const string DefaultRunMethodName = "Run";
         private const string DefaultWriterParameterName = "__output__";
 
-        private static readonly object _lock = new object();
-        private static readonly Type _defaultWriterType = null; // dynamic by default
+        private static readonly object s_lock = new object();
+        private static readonly Type s_defaultWriterType = null; // dynamic by default
 
         private MethodInfo _runMethodInfo = null;
-        private string _className;
-        private string _runMethodName;
-        private string _writerParameterName;
-        private Type _writerType;
+        private string? _className;
+        private string? _runMethodName;
+        private string? _writerParameterName;
+        private Type? _writerType;
         private readonly List<TemplateArgument> _arguments = new List<TemplateArgument>();
         private readonly List<string> _usings = new List<string>();
         private readonly List<string> _referencePaths = new List<string>();
@@ -48,17 +48,17 @@ namespace Meziantou.Framework.Templating
 
         public Type OutputType
         {
-            get => _writerType ?? _defaultWriterType;
+            get => _writerType ?? s_defaultWriterType;
             set => _writerType = value;
         }
 
-        public string BaseClassFullTypeName { get; set; }
+        public string? BaseClassFullTypeName { get; set; }
 
         public string StartCodeBlockDelimiter { get; set; } = "<%";
         public string EndCodeBlockDelimiter { get; set; } = "%>";
-        public IList<ParsedBlock> Blocks { get; private set; }
+        public IList<ParsedBlock>? Blocks { get; private set; }
         public bool IsBuilt => _runMethodInfo != null;
-        public string SourceCode { get; private set; }
+        public string? SourceCode { get; private set; }
 
         public IReadOnlyList<TemplateArgument> Arguments => _arguments;
         public IReadOnlyList<string> Usings => _usings;
@@ -81,7 +81,7 @@ namespace Meziantou.Framework.Templating
             AddUsing(@namespace, null);
         }
 
-        public void AddUsing(string @namespace, string alias)
+        public void AddUsing(string @namespace, string? alias)
         {
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
@@ -101,7 +101,7 @@ namespace Meziantou.Framework.Templating
             AddUsing(type, null);
         }
 
-        public void AddUsing(Type type, string alias)
+        public void AddUsing(Type type, string? alias)
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -159,7 +159,7 @@ namespace Meziantou.Framework.Templating
             AddArgument(name, typeof(T));
         }
 
-        public void AddArgument(string name, Type type)
+        public void AddArgument(string name, Type? type)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -304,7 +304,7 @@ namespace Meziantou.Framework.Templating
             if (IsBuilt)
                 return;
 
-            lock (_lock)
+            lock (s_lock)
             {
                 if (IsBuilt)
                     return;

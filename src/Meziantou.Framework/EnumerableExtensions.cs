@@ -66,9 +66,6 @@ namespace Meziantou.Framework
 
         public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> source) where T : class
         {
-            if (source == null)
-                return null;
-
             return source.Where(item => item != null);
         }
 
@@ -79,9 +76,6 @@ namespace Meziantou.Framework
 
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
         {
-            if (source == null)
-                return null;
-
             var hash = new HashSet<TKey>(comparer);
             return source.Where(p => hash.Add(keySelector(p)));
         }

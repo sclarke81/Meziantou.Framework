@@ -14,7 +14,7 @@ namespace Meziantou.Framework
 
         private static readonly ConcurrentDictionary<Type, TypeCache> _cache = new ConcurrentDictionary<Type, TypeCache>();
 
-        private readonly object _originalObject;
+        private readonly object? _originalObject;
         private readonly TypeCache _typeCache;
 
         public ReflectionDynamicObject(object obj)
@@ -179,7 +179,7 @@ namespace Meziantou.Framework
             return true;
         }
 
-        public override string ToString()
+        public override string? ToString()
         {
             if (_originalObject != null)
                 return _originalObject.ToString();
@@ -187,7 +187,7 @@ namespace Meziantou.Framework
             return null;
         }
 
-        private bool TryGetMemberValue(string name, out object result)
+        private bool TryGetMemberValue(string name, out object? result)
         {
             if (_originalObject == null)
             {
@@ -256,7 +256,7 @@ namespace Meziantou.Framework
             return false;
         }
 
-        private bool TryGetIndex(PropertyInfo indexer, object instance, object[] indexes, out object result)
+        private bool TryGetIndex(PropertyInfo indexer, object instance, object[] indexes, out object? result)
         {
             try
             {
